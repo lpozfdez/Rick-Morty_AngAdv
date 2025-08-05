@@ -5,29 +5,31 @@
     <small class="text-muted">{{ character.species }}</small>
   </div>
 
-  <!-- Card Image -->
+  <!-- Imagen -->
   <img
     [src]="character | characterImage"
     [alt]="character.name"
     class="card-img-top"
   />
 
-  <!-- Card Content -->
+  <!-- Card -->
   <div class="card-body">
-    <h6 class="card-subtitle mb-2 text-muted">{{ character.created }}</h6>
     <p class="card-text">
-      <strong>Lugar de origen:</strong> {{ character.origin.name }}<br />
+      <strong>Primera aparición:</strong> {{ firstEp$ | async }}<br />
+    </p>
+    <p class="card-text">
+      <strong>Lugar de origen:</strong> {{ character.origin.name === 'unknown' ? 'Desconocido' : character.origin.name }}<br />
     </p>
 
-      <!-- Chips-like style -->
-      <div class="mt-2 d-flex flex-wrap gap-1">
-        <span
-        class="badge rounded-pill bg-secondary"
-        *ngIf="character.type"
-        >
-          {{ character.type }}
-        </span>
-      </div>
+    <!-- Chips Especie -->
+    <div class="mt-2 d-flex flex-wrap gap-1">
+      <span
+      class="badge rounded-pill bg-secondary"
+      *ngIf="character.species"
+      >
+        {{ character.species }}
+      </span>
+    </div>
   </div>
 
   <hr class="my-0" />

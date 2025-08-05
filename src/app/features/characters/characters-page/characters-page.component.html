@@ -1,1 +1,25 @@
-<p>characters-page works!</p>
+<div class="container">
+  <!-- Imagen -->
+  <div class="text-start mb-3">
+    <img
+      [src]="character.image"
+      [alt]="character.name"
+      class="rounded img-fluid"
+    />
+  </div>
+
+  <!-- Información -->
+  <div class="row text-start">
+    <div class="col-12 col-md-6 mb-2 mb-md-0">
+      <p><strong>Nombre:</strong> {{ character.name }}</p>
+      <p><strong>Especie:</strong> {{ character.species }}</p>
+      <p><strong>Género:</strong> {{ character.gender }}</p>
+    </div>
+    <div class="col-12 col-md-6">
+      <p><strong>Fecha de la primera aparición:</strong> {{ character.created | date }}</p>
+      <p><strong>Origen:</strong> {{ character.origin.name }}</p>
+      <p><strong>Residencia:</strong> {{ character.location.name }}</p>
+      <p><strong>Estado:</strong> {{ character.status }}</p>
+    </div>
+  </div>
+</div>
