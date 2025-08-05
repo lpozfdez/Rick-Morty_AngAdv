@@ -1,0 +1,21 @@
+.nav-link {
+  transition: color 0.3s ease;
+  cursor: pointer;
+
+  &.hover-green:hover {
+    color: #39ff14;
+  }
+
+  &.hover-pink:hover {
+    color: #ff1493;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: #6c757d !important;
+    text-decoration: none;
+  }
+
+}

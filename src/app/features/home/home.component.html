@@ -1,0 +1,24 @@
+<div class="text-center mt-4">
+  <h2>Selecciona tu rol para continuar</h2>
+</div>
+
+<div
+  class="role-selection d-flex justify-content-center gap-4 mt-5 flex-wrap"
+  [ngClass]="(selectedRole$ | async) === 'guest' ? 'guest-theme' : 'admin-theme'">
+
+  <div
+    class="card role-card admin-card"
+    (click)="selectRole('admin')">
+    <div class="card-img-overlay d-flex flex-column justify-content-end">
+      <h5 class="card-title">Administrador</h5>
+    </div>
+  </div>
+
+  <div
+    class="card role-card guest-card"
+    (click)="selectRole('guest')">
+    <div class="card-img-overlay d-flex flex-column justify-content-end">
+      <h5 class="card-title">Invitado</h5>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+.role-selection {
+  &.admin-theme .role-card:hover {
+    box-shadow: 0 0 15px 5px #39ff14;
+  }
+
+  &.guest-theme .role-card:hover {
+    box-shadow: 0 0 15px 5px #ff1493;
+  }
+
+  .role-card {
+    width: 20rem;
+    height: 20rem;
+    cursor: pointer;
+    color: white;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    .card-img-overlay {
+      border-radius: 0.25rem;
+      background-size: cover;
+      background-position: center;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .card-title {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      z-index: 10;
+    }
+
+    &:not(:hover) {
+      transform: scale(1);
+    }
+  }
+
+  .admin-card .card-img-overlay {
+    background-image: url('https://rickandmortyapi.com/api/character/avatar/1.jpeg');
+  }
+
+  .guest-card .card-img-overlay {
+    background-image: url('https://rickandmortyapi.com/api/character/avatar/2.jpeg');
+  }
+}

@@ -1,0 +1,61 @@
+<header class="w-100">
+  <nav class="navbar navbar-expand-lg border-bottom border-body w-100">
+    <div class="container d-flex flex-lg-row flex-column align-items-center justify-content-between p-2 gap-2">
+      <!-- Logo -->
+      <a class="navbar-brand" routerLink="/">Rick & Morty</a>
+
+      <!-- Botón toggle -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Menú -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/characters"
+              [class.disabled]="!isRoleSet"
+              [ngClass]="roleClass"
+              (click)="handleMenuClick($event)"
+            >
+              Mostrar personajes
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/characters/new-character"
+              [class.disabled]="!isRoleSet"
+              [ngClass]="roleClass"
+              (click)="handleMenuClick($event)"
+            >
+              Añadir personajes
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Botón tema -->
+      <button
+        type="button"
+        class="btn btn-outline-secondary ms-auto"
+        (click)="toggleTheme()"
+        [attr.title]="isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+      >
+        <i [class]="isDarkMode ? 'bi bi-moon-fill' : 'bi bi-sun-fill'"></i>
+      </button>
+    </div>
+  </nav>
+</header>
