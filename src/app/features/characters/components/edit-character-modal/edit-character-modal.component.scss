@@ -1,0 +1,23 @@
+@import 'src/styles/variables';
+
+@keyframes borderGlow {
+  0% {
+    border-color: transparent;
+    box-shadow: none;
+  }
+  50% {
+    border-color: $hover-purple;
+    box-shadow: 0 0 8px 2px $hover-purple;
+  }
+  100% {
+    border-color: $character-border;
+    box-shadow: 0 0 20px 5px $character-border;
+  }
+}
+
+.character-box {
+  border: 3px solid transparent;
+  padding: 20px;
+  border-radius: 8px;
+  animation: borderGlow 2s ease forwards;
+}

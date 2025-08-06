@@ -1,5 +1,9 @@
-<div class="character-container container my-4">
-  <div class="row character-box">
+<div *ngIf="deleted" class="alert delete-banner text-center my-4">
+  Personaje eliminado correctamente. Serás redirigido en 3 segundos...
+</div>
+
+<div class="character-container container my-4" *ngIf="!deleted && character">
+  <div class="row my-5" [ngClass]="{'character-box': !showEditModal}">
 
     <div class="col-12 col-lg-4 image-column text-center mb-4 mb-lg-0">
       <img [src]="character.image"
@@ -13,11 +17,15 @@
         <h3 class="text-muted mb-5">{{ character.species }} - <span [ngClass]="character.status | characterStatus">{{ character.status }}</span></h3>
         <div class="col-12 col-md-6 mb-5">
           <strong>Género:</strong>
-          <div>{{ character.gender }}</div>
+          <div>{{ character.gender === 'Female' ? 'Femenino': character.gender === 'Male' ? 'Masculino' : character.gender }}</div>
         </div>
         <div class="col-12 col-md-6 mb-5">
           <strong>Origen:</strong>
-          <div>{{ character.origin.name }}</div>
+          <div>{{ character.origin.name === 'unknown' ? 'Desconocido' : character.origin.name }}</div>
+        </div>
+        <div class="col-12 col-md-6 mb-5">
+          <strong>Tipo:</strong>
+          <div>{{ character.type ? character.type : '-' }}</div>
         </div>
         <div class="col-12 col-md-6 mb-5">
           <strong>Ubicación actual:</strong>
@@ -25,7 +33,7 @@
         </div>
         <div class="col-12 col-md-6 mb-5">
           <strong>Creado el:</strong>
-          <div>{{ character.created | date }}</div>
+          <div>{{ character.created | date:'MMMM d, y' }}</div>
         </div>
         <div class="col-12 col-md-6 mb-5">
           <strong>Cantidad de episodios:</strong>
@@ -36,8 +44,24 @@
 
   </div>
 
-  <!-- Botón volver-->
-  <div class="text-center mt-4">
-    <button class="btn btn-outline-primary" (click)="goBack()">Volver al listado</button>
+  <!-- Botones -->
+  <div class="d-flex justify-content-between mt-5">
+    <a routerLink="/characters" class="btn btn-outline-primary">
+      Volver al listado
+    </a>
+
+    <div>
+      <button class="btn btn-outline-danger mx-1" (click)="onDelete()">Borrar</button>
+      <button class="btn btn-outline-success mx-1" (click)="onEdit()">Editar</button>
+    </div>
   </div>
 </div>
+
+<app-edit-character-modal
+  *ngIf="showEditModal"
+  [character]="character"
+  (closed)="showEditModal = false"
+  [visible]="showEditModal"
+  (updated)="onCharacterUpdated($event)">
+</app-edit-character-modal>
+

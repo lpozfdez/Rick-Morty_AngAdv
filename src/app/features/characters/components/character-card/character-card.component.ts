@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Character } from '../../models/Character.model';
-import { Episode } from 'src/app/features/episodes/models/Episode.model';
 import { EpisodeService } from 'src/app/features/episodes/services/episode.service';
 import { map, Observable } from 'rxjs';
 

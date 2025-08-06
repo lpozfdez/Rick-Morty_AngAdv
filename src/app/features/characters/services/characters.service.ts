@@ -36,10 +36,4 @@ export class CharactersService {
     return this.httpClient.patch<Character>( `${ this.baseUrl }/character/${ Character.id }`, Character );
   }
 
-  deleteCharacter( id: string ): Observable<boolean>{
-    return this.httpClient.delete( `${ this.baseUrl }/character/${ id }`).pipe(
-      catchError( err => of(false) ),
-      map( resp => true )
-    );
-  }
 }

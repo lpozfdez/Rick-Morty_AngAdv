@@ -12,6 +12,8 @@ import { switchMap } from 'rxjs';
 export class CharactersPageComponent {
 
   public character!: Character;
+  public showEditModal = false;
+  public deleted = false;
 
   constructor( private serv: CharactersService, private activatedRoute: ActivatedRoute, private router: Router ){}
 
@@ -33,7 +35,24 @@ export class CharactersPageComponent {
     })
   }
 
+  onCharacterUpdated(updatedCharacter: Character){
+    this.character = { ...updatedCharacter };
+  }
+
+  onEdit(){
+    this.showEditModal = true;
+    console.log(this.showEditModal);
+  }
+
+  onDelete(){
+    this.character = null as any;
+    this.deleted = true;
+    setTimeout(() => {
+      this.router.navigate(['/characters/list']);
+    }, 3000);
+  }
+
   goBack():void{
-    this.router.navigateByUrl('character/list');
+    this.router.navigate(['/characters/list']);
   }
 }

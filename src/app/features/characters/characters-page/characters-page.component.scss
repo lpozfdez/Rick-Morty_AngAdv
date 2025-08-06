@@ -21,9 +21,18 @@
     box-shadow: 0 4px 10px $img-shadow;
   }
 
-  button {
+  .btn-outline-primary {
     color: $primary-color;
     border-color: $primary-color;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $primary-color;
+      color: #fff;
+      border-color: $primary-color;
+    }
   }
 
   h2 {
@@ -52,4 +61,12 @@
   padding: 20px;
   border-radius: 8px;
   animation: borderGlow 2s ease forwards;
+}
+
+.delete-banner {
+  background-color: $hover-pink;
+  color: $dark-color;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
 }
