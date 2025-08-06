@@ -1,0 +1,55 @@
+@import 'src/styles/variables';
+
+.character-container {
+
+  .image-column {
+    text-align: center;
+
+    h3 {
+      margin-top: 1rem;
+    }
+
+    p {
+      color: $disabled-color;
+    }
+  }
+
+  .character-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px $img-shadow;
+  }
+
+  button {
+    color: $primary-color;
+    border-color: $primary-color;
+  }
+
+  h2 {
+    color: $primary-color;
+  }
+
+}
+
+@keyframes borderGlow {
+  0% {
+    border-color: transparent;
+    box-shadow: none;
+  }
+  50% {
+    border-color: $hover-purple;
+    box-shadow: 0 0 8px 2px $hover-purple;
+  }
+  100% {
+    border-color: $character-border;
+    box-shadow: 0 0 20px 5px $character-border;
+  }
+}
+
+.character-box {
+  border: 3px solid transparent;
+  padding: 20px;
+  border-radius: 8px;
+  animation: borderGlow 2s ease forwards;
+}

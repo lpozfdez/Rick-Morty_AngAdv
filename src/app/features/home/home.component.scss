@@ -1,17 +1,19 @@
+@import 'src/styles/variables';
+
 .role-selection {
   &.admin-theme .role-card:hover {
-    box-shadow: 0 0 15px 5px #39ff14;
+    box-shadow: 0 0 15px 5px $hover-green;
   }
 
   &.guest-theme .role-card:hover {
-    box-shadow: 0 0 15px 5px #ff1493;
+    box-shadow: 0 0 15px 5px $hover-pink;
   }
 
   .role-card {
     width: 20rem;
     height: 20rem;
     cursor: pointer;
-    color: white;
+    color: $light-color;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -28,7 +30,7 @@
     }
 
     .card-title {
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: $card-bg;
       padding: 0.5rem 1rem;
       border-radius: 0.25rem;
     }

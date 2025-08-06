@@ -12,6 +12,7 @@ import { CharacterCardComponent } from './components/character-card/character-ca
 import { CharacterImagePipe } from './pipes/character-image.pipe';
 import { CharactersService } from './services/characters.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CharacterStatusPipe } from './pipes/character-status.pipe';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CharactersPageComponent,
     CharactersSearchComponent,
     CharacterCardComponent,
-    CharacterImagePipe
+    CharacterImagePipe,
+    CharacterStatusPipe
   ],
   imports: [
     CommonModule,
