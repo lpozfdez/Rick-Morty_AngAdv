@@ -1,1 +1,74 @@
-<p>characters-new works!</p>
+<form [formGroup]="form" (ngSubmit)="save()" class="container">
+
+  <div class="row mb-3">
+    <div class="col-12">
+      <h5>Nuevo personaje</h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div *ngFor="let field of stringFields" class="col-md-6 mb-3">
+      <label *ngIf="field.type !== 'checkbox'" [for]="field.key" class="form-label">{{ field.label }}</label>
+
+      <ng-container [ngSwitch]="field.type">
+
+        <!-- Textarea -->
+        <textarea
+          *ngSwitchCase="'textarea'"
+          [id]="field.key"
+          [formControlName]="field.key"
+          class="form-control"
+          rows="3"
+        ></textarea>
+
+        <!-- Select -->
+        <select
+          *ngSwitchCase="'select'"
+          [id]="field.key"
+          [formControlName]="field.key"
+          class="form-select"
+        >
+          <option *ngFor="let opt of field.options" [value]="opt">{{ opt }}</option>
+        </select>
+
+        <!-- Checkbox -->
+        <div *ngSwitchCase="'checkbox'" class="form-check mt-2">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            [id]="field.key"
+            [formControlName]="field.key"
+          />
+          <label class="form-check-label" [for]="field.key">{{ field.label }}</label>
+        </div>
+
+        <!-- Text input -->
+        <input
+          *ngSwitchDefault
+          [id]="field.key"
+          [formControlName]="field.key"
+          [type]="field.type || 'text'"
+          class="form-control"
+        />
+
+        <!-- Input file -->
+        <input
+        *ngSwitchCase="'file'"
+        [id]="field.key"
+        type="file"
+        class="form-control"
+        (change)="onFileSelected($event)"
+        />
+
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 d-flex justify-content-end mt-4">
+      <button type="button" class="btn btn-outline-primary mx-2" (click)="close()">Cancelar</button>
+      <button type="submit" class="btn btn-outline-success mx-2">Guardar</button>
+    </div>
+  </div>
+
+</form>

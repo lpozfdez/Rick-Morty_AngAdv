@@ -16,6 +16,10 @@ export class CharactersService {
     return this.httpClient.get<any>(`${this.baseUrl}/character/?page=${page}`);
   }
 
+  getAllCharacters(): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseUrl}/character`);
+  }
+
   getCharacterById( id:string ): Observable<Character | undefined>{
     return this.httpClient.get<Character>(`${this.baseUrl}/character/${id}`)
     .pipe(
@@ -27,13 +31,15 @@ export class CharactersService {
     return this.httpClient.get<Character[]>(`${this.baseUrl}/character?q=${ query }&limit=6`);
   }
 
-  addCharacter( Character: Character): Observable<Character>{
-    return this.httpClient.post<Character>( `${ this.baseUrl }/character`, Character );
+  addCharacter( character: Character): Observable<Character>{
+    alert(JSON.stringify(character, null, 2));
+    return of(character);
+    // return this.httpClient.post<Character>( `${ this.baseUrl }/character`, Character );
   }
 
-  updateCharacter( Character: Character): Observable<Character>{
-    if(!Character.id) throw Error('Character id is required');
-    return this.httpClient.patch<Character>( `${ this.baseUrl }/character/${ Character.id }`, Character );
+  updateCharacter( character: Character): Observable<Character>{
+    if(!character.id) throw Error('Character id is required');
+    return this.httpClient.patch<Character>( `${ this.baseUrl }/character/${ character.id }`, character );
   }
 
 }

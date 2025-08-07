@@ -12,8 +12,8 @@ export class EpisodeService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getEpisode(page: number): Observable<any> {
-    return this.httpClient.get<any>(`${this.baseUrl}/episode/?page=${page}`);
+  getEpisode(): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseUrl}/episode`);
   }
 
   getEpisodeById( id:string ): Observable<Episode | undefined>{

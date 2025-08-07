@@ -1,0 +1,81 @@
+<div class="d-flex flex-column gap-3">
+  <div class="form-group position-relative">
+    <label for="searchInput">Buscador</label>
+
+    <!-- Tipo de búsqueda -->
+    <div class="mb-4">
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="searchType"
+          [(ngModel)]="searchType"
+          [value]="'name'"
+          (change)="onSearchTypeChange()" />
+        <label class="form-check-label">Nombre</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="searchType"
+          [(ngModel)]="searchType"
+          [value]="'status'"
+          (change)="onSearchTypeChange()" />
+        <label class="form-check-label">Estado</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="searchType"
+          [(ngModel)]="searchType"
+          [value]="'episode'"
+          (change)="onSearchTypeChange()" />
+        <label class="form-check-label">Título de Episodio</label>
+      </div>
+    </div>
+
+
+    <!-- Búsqueda -->
+    <input
+      id="searchInput"
+      type="text"
+      class="form-control"
+      [formControl]="searchInput"
+      (input)="search()"
+      (focus)="showDropdown = true"
+      (blur)="hideDropdown()"
+      autocomplete="off"
+    />
+
+    <!-- Resultados -->
+    <div class="my-3" *ngIf="(characters.length > 0 || episodes.length > 0) && showDropdown">
+      <h6>Resultados:</h6>
+
+      <ul class="list-group" *ngIf="characters.length > 0">
+        <li
+          class="list-group-item"
+          *ngFor="let char of characters"
+          (click)="onSelectedOption(char)"
+        >
+          {{ char.name }} ({{ char.status }})
+        </li>
+      </ul>
+
+      <ul class="list-group" *ngIf="episodes.length > 0">
+        <li
+          class="list-group-item"
+          *ngFor="let ep of episodes"
+          (click)="onSelectedOption(ep)"
+        >
+          {{ ep.name }} ({{ ep.episode }})
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+</div>

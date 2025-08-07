@@ -14,6 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CharacterStatusPipe } from './pipes/character-status.pipe';
 import { EditCharacterModalComponent } from './components/edit-character-modal/edit-character-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CharacterCardComponent,
     CharacterImagePipe,
     CharacterStatusPipe,
-    EditCharacterModalComponent
+    EditCharacterModalComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
