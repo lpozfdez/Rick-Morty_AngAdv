@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private roleService: RoleService) {
     this.role$ = this.roleService.role$;
+    console.log(this.role$);
   }
 
   ngOnInit(): void {

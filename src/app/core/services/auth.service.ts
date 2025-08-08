@@ -6,39 +6,33 @@ import { User } from '../auth/models/User.model';
 })
 export class AuthService {
 
-  private bseUrl = '';
-  private user?: User ;
+  private role: 'admin' | 'guest' = 'guest';
 
-  constructor() { }
+  constructor() {
 
-  get currentUser(): User | undefined {
-    if(!this.user) return undefined;
-    return structuredClone( this.user );
+    const savedRole = localStorage.getItem('userRole');
+
+    if (savedRole === 'admin' || savedRole === 'guest') {
+      this.role = savedRole;
+    }
+
+   }
+
+  setRole(role: 'admin' | 'guest') {
+    this.role = role;
+    localStorage.setItem('userRole', role);
   }
 
-  // login( email: string, pass: string ): Observable<User>{
-  //   return this.httpClient.get<User>(`${this.bseUrl}/users/1`).pipe(
-  //     tap( user => this.user = user),
-  //     tap( user => localStorage.setItem('token', 'esteEsMiToken' ))
-  //   );
-  // }
-
-  logout(){
-    this.user = undefined;
-    localStorage.clear();
-
+  getRole(): 'admin' | 'guest' {
+    return this.role;
   }
 
-  // checkAuthenticator(): Observable<boolean>{
-  //   if(!localStorage.getItem('token')) return of(false);
+  isAdmin(): boolean {
+    return this.role === 'admin';
+  }
 
-  //   const token = localStorage.getItem('token');
+  isGuest(): boolean {
+    return this.role === 'guest';
+  }
 
-  //   return this.httpClient.get<User>(`${this.bseUrl}/users/1`).pipe(
-  //     tap( user => this.user = user),
-  //     map( user => !!user),
-  //     catchError( err => of(false))
-  //   );
-
-  // }
 }

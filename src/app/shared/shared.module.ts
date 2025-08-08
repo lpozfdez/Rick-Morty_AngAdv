@@ -1,3 +1,4 @@
+import { Page404Component } from './page404/page404.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
@@ -12,6 +13,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     FooterComponent,
     SpinnerComponent,
     PaginationComponent,
+    Page404Component,
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     HeaderComponent,
     FooterComponent,
     SpinnerComponent,
-    PaginationComponent
+    PaginationComponent,
+    Page404Component
   ]
 })
 export class SharedModule {}

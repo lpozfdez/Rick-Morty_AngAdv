@@ -5,16 +5,19 @@ import { CharactersNewComponent } from './characters-new/characters-new.componen
 import { CharactersSearchComponent } from './characters-search/characters-search.component';
 import { CharactersListComponent } from './characters-list/characters-list.component';
 import { CharactersPageComponent } from './characters-page/characters-page.component';
+import { AuthGuard } from 'src/app/core/auth/guards/auth.guard';
+import { Page404Component } from 'src/app/shared/page404/page404.component';
 
 const routes: Routes = [
   {
     path: '' ,
     component: CharactersLayoutComponent,
     children: [
-      { path: 'new-character', component: CharactersNewComponent },
+      { path: 'new-character', component: CharactersNewComponent, canActivate: [AuthGuard] },
       { path: 'search', component: CharactersSearchComponent },
       { path: 'list', component: CharactersListComponent },
-      { path: ':id', component: CharactersPageComponent },
+      { path: 'page404', component: Page404Component },
+      { path: ':id', component: CharactersPageComponent, canActivate: [AuthGuard] },
       { path: '**', redirectTo: 'list' },
     ]
   },

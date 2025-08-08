@@ -11,12 +11,12 @@ import { Observable } from 'rxjs';
 export class HomeComponent {
   selectedRole$: Observable<'admin' | 'guest' | null>;
 
-  constructor(private router: Router, private roleService: RoleService) {
+  constructor(private roleService: RoleService) {
     this.selectedRole$ = this.roleService.role$;
   }
 
   selectRole(role: 'admin' | 'guest'): void {
     this.roleService.setRole(role);
-    // this.router.navigate([role]);
+
   }
 }

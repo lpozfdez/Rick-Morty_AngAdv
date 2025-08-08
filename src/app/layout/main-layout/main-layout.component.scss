@@ -1,8 +1,9 @@
 .main-layout {
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
+  //padding: 1.5rem;
   box-sizing: border-box;
 }
 

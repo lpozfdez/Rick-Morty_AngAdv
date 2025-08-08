@@ -8,11 +8,15 @@ import { Character } from '../models/Character.model';
   styleUrls: ['./characters-list.component.scss']
 })
 export class CharactersListComponent {
-  public characters: Character[] = [];
+
+  characters: Character[] = [];
+  totalCharacters: Character[] = [];
   currentPage: number = 1;
   totalPages: number = 0;
+  itemsPerPage = 12;
   pages: number[] = [];
   isLoading = true;
+  isFiltered = false;
 
   constructor( private charactersService: CharactersService ){}
 
@@ -25,11 +29,13 @@ export class CharactersListComponent {
     this.charactersService.getCharacters(page).subscribe({
       next: (response) => {
         setTimeout(() => {
-          this.characters = response.results;
+          this.totalCharacters = response.results;
+          this.characters = this.totalCharacters;
           this.totalPages = response.info.pages;
           this.currentPage = page;
           this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
           this.isLoading = false;
+          this.isFiltered = false;
         }, 300);
       },
       error: (err) => {
@@ -39,9 +45,14 @@ export class CharactersListComponent {
     });
   }
 
+  filterChar( results: Character[] ) {
+    this.characters = results;
+    this.isFiltered = true;
+    this.pages = [];
+  }
 
   goToPage(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
+    if (!this.isFiltered && page >= 1 && page <= this.totalPages) {
       this.loadCharacters(page);
     }
   }

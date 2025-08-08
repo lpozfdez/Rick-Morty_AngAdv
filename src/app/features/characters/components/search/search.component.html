@@ -52,10 +52,10 @@
     />
 
     <!-- Resultados -->
-    <div class="my-3" *ngIf="(characters.length > 0 || episodes.length > 0) && showDropdown">
+    <div class="my-3" *ngIf="showDropdown">
       <h6>Resultados:</h6>
 
-      <ul class="list-group" *ngIf="characters.length > 0">
+      <ul class="list-group" *ngIf="characters.length > 0 && this.searchType !== 'episode'">
         <li
           class="list-group-item"
           *ngFor="let char of characters"
@@ -65,7 +65,7 @@
         </li>
       </ul>
 
-      <ul class="list-group" *ngIf="episodes.length > 0">
+      <ul class="list-group" *ngIf="episodes.length > 0 && this.searchType === 'episode'">
         <li
           class="list-group-item"
           *ngFor="let ep of episodes"
