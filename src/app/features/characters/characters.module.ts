@@ -6,7 +6,6 @@ import { CharactersLayoutComponent } from './characters-layout/characters-layout
 import { CharactersListComponent } from './characters-list/characters-list.component';
 import { CharactersNewComponent } from './characters-new/characters-new.component';
 import { CharactersPageComponent } from './characters-page/characters-page.component';
-import { CharactersSearchComponent } from './characters-search/characters-search.component';
 import { CharacterCardComponent } from './components/character-card/character-card.component';
 import { CharacterImagePipe } from './pipes/character-image.pipe';
 import { CharactersService } from './services/characters.service';
@@ -26,7 +25,6 @@ import { SearchComponent } from './components/search/search.component';
     CharactersListComponent,
     CharactersNewComponent,
     CharactersPageComponent,
-    CharactersSearchComponent,
     CharacterCardComponent,
     CharacterImagePipe,
     CharacterStatusPipe,

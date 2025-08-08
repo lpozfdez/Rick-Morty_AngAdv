@@ -13,7 +13,7 @@ import { Episode } from 'src/app/features/episodes/models/Episode.model';
 })
 export class SearchComponent {
 
-  @Output() searchResultsChange = new EventEmitter<(Character)[]>();
+  @Output() searchResultsChange = new EventEmitter<any>();
 
   searchInput = new FormControl('');
   searchType = 'name';
@@ -38,19 +38,17 @@ export class SearchComponent {
     switch(this.searchType) {
       case 'name':
         this.characterSub = this.chrServ.getAllCharacters().subscribe((response) => {
-          const allCharacters = response.results || [];
-          this.characters = [...allCharacters];
+          this.characters = response;
+
           this.characters = this.characters.filter(c =>
             c.name.toLowerCase().includes(searchWord)
           );
           this.searchResultsChange.emit(this.characters);
-          console.log(this.characters);
         });
         break;
       case 'status':
         this.characterSub = this.chrServ.getAllCharacters().subscribe((response) => {
-          const allCharacters = response.results || [];
-          this.characters = [...allCharacters];
+          this.characters = response;
           this.characters = this.characters.filter(c =>
             c.status.toLowerCase().includes(searchWord)
           );
@@ -58,10 +56,9 @@ export class SearchComponent {
           console.log(this.characters);
         });
         break;
-      case 'episode': // TODO arreglar
+      case 'episode':
         this.characterSub = this.episodeSrv.getEpisode().subscribe((response) => {
-          const allEpisodes = response.results || [];
-          this.episodes = [...allEpisodes];
+          this.episodes = response;
           this.episodes = this.episodes.filter(e =>
             e.name.toLowerCase().includes(searchWord)
           );
@@ -78,7 +75,7 @@ export class SearchComponent {
 
     this.chrServ.getAllCharacters().subscribe((response) => {
 
-      const allCharacters: Character[] = response.results;
+      const allCharacters: Character[] = response;
 
       const episodeUrls = this.episodes.map(e => e.url);
 
@@ -120,4 +117,9 @@ export class SearchComponent {
     setTimeout(() => (this.showDropdown = false), 150);
   }
 
+  cleanSearch(){
+    this.characters = [];
+    this.searchInput.setValue('');
+    this.searchResultsChange.emit('clean');
+  }
 }

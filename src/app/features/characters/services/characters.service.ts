@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, catchError, forkJoin, map, of, switchMap, tap } from 'rxjs';
 import { Character } from '../models/Character.model';
 
 
@@ -17,7 +17,21 @@ export class CharactersService {
   }
 
   getAllCharacters(): Observable<any> {
-    return this.httpClient.get<any>(`${this.baseUrl}/character`);
+    return this.httpClient.get<any>(`${this.baseUrl}/character`).pipe(
+      switchMap(response => {
+        const totalPages = response.info.pages;
+        const requests = [];
+
+        for (let i = 1; i <= totalPages; i++) {
+          requests.push(this.httpClient.get<any>(`https://rickandmortyapi.com/api/character?page=${i}`));
+        }
+
+        return forkJoin(requests);
+
+      }),
+      map(pages => pages.flatMap(page => page.results)),
+      tap(allCharacters => console.log('Personajes combinados:', allCharacters))
+    )
   }
 
   getCharacterById( id:string ): Observable<Character | undefined>{
@@ -34,7 +48,6 @@ export class CharactersService {
   addCharacter( character: Character): Observable<Character>{
     alert(JSON.stringify(character, null, 2));
     return of(character);
-    // return this.httpClient.post<Character>( `${ this.baseUrl }/character`, Character );
   }
 
   updateCharacter( character: Character): Observable<Character>{

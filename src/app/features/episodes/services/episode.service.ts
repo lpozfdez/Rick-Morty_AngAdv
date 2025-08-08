@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, forkJoin, map, Observable, of, switchMap } from 'rxjs';
+import { catchError, forkJoin, map, Observable, of, switchMap, tap } from 'rxjs';
 import { Episode } from '../models/Episode.model';
 
 @Injectable({
@@ -12,7 +12,6 @@ export class EpisodeService {
 
   constructor(private httpClient: HttpClient) { }
 
-  // TODO arreglar
   getEpisode(): Observable<any> {
     return this.httpClient.get<any>('https://rickandmortyapi.com/api/episode').pipe(
       switchMap(response => {
@@ -22,9 +21,12 @@ export class EpisodeService {
         for (let i = 1; i <= totalPages; i++) {
           requests.push(this.httpClient.get<any>(`https://rickandmortyapi.com/api/episode?page=${i}`));
         }
-        console.log(of(requests));
-        return of(requests);
-      })
+
+        return forkJoin(requests);
+
+      }),
+      map(pages => pages.flatMap(page => page.results)),
+      tap(allEpisodes => console.log('Episodios combinados:', allEpisodes))
     );
   }
 

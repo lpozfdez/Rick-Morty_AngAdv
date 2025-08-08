@@ -36,6 +36,9 @@
           (change)="onSearchTypeChange()" />
         <label class="form-check-label">Título de Episodio</label>
       </div>
+      <button (click)="cleanSearch()" >
+        Limpiar
+      </button>
     </div>
 
 
@@ -51,11 +54,13 @@
       autocomplete="off"
     />
 
+
+
     <!-- Resultados -->
     <div class="my-3" *ngIf="showDropdown">
       <h6>Resultados:</h6>
 
-      <ul class="list-group" *ngIf="characters.length > 0 && this.searchType !== 'episode'">
+      <ul class="list-group results-scroll" *ngIf="characters.length > 0 && this.searchType !== 'episode'">
         <li
           class="list-group-item"
           *ngFor="let char of characters"
@@ -65,7 +70,7 @@
         </li>
       </ul>
 
-      <ul class="list-group" *ngIf="episodes.length > 0 && this.searchType === 'episode'">
+      <ul class="list-group results-scroll" *ngIf="episodes.length > 0 && this.searchType === 'episode'">
         <li
           class="list-group-item"
           *ngFor="let ep of episodes"

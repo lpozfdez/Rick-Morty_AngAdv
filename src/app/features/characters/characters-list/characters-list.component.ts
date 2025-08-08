@@ -45,10 +45,15 @@ export class CharactersListComponent {
     });
   }
 
-  filterChar( results: Character[] ) {
-    this.characters = results;
-    this.isFiltered = true;
-    this.pages = [];
+  filterChar( results: any ) {
+    if( results === 'clean' ){
+      this.isFiltered = false;
+      this.loadCharacters(this.currentPage);
+    }else{
+      this.characters = results;
+      this.isFiltered = true;
+      this.pages = [];
+    }
   }
 
   goToPage(page: number): void {
